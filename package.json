@@ -115,9 +115,6 @@
     "webpack-cli": "^5.1.4",
     "webtorrent-fixtures": "1.7.5"
   },
-  "optionalDependencies": {
-    "utp-native": "^2.5.3"
-  },
   "engines": {
     "node": ">=14"
   },

@@ -80,7 +80,6 @@ export default class WebTorrent extends EventEmitter {
     this.natPmp = opts.natPmp ?? true
     this.torrents = []
     this.maxConns = Number(opts.maxConns) || 55
-    this.utp = WebTorrent.UTP_SUPPORT && opts.utp !== false
 
     this._downloadLimit = Math.max((typeof opts.downloadLimit === 'number') ? opts.downloadLimit : -1, -1)
     this._uploadLimit = Math.max((typeof opts.uploadLimit === 'number') ? opts.uploadLimit : -1, -1)
@@ -527,7 +526,7 @@ export default class WebTorrent extends EventEmitter {
           this.natTraversal.map({
             publicPort: this.torrentPort,
             privatePort: this.torrentPort,
-            protocol: this.utp ? null : 'tcp',
+            protocol: 'tcp',
             description: 'WebTorrent Torrent'
           }).catch(err => {
             debug('error mapping WebTorrent port via UPnP/PMP: %o', err)
@@ -560,7 +559,6 @@ export default class WebTorrent extends EventEmitter {
 }
 
 WebTorrent.WEBRTC_SUPPORT = Peer.WEBRTC_SUPPORT
-WebTorrent.UTP_SUPPORT = ConnPool.UTP_SUPPORT
 WebTorrent.VERSION = VERSION
 
 /**
